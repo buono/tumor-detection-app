@@ -9,7 +9,8 @@ import numpy as np
 
 classes = ["yes腫瘍","Non腫瘍"]
 #classes = ["0","1","2","3","4","5","6","7","8","9"]
-image_size = 28
+image_size = 50
+#image_size = 28
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
