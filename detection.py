@@ -7,10 +7,8 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 
 
-classes = ["yes腫瘍","Non腫瘍"]
-#classes = ["0","1","2","3","4","5","6","7","8","9"]
+classes = ["腫瘍あり","腫瘍なし"]
 image_size = 50
-#image_size = 28
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -21,8 +19,6 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 model = load_model('./model.h5', compile=False)#学習済みモデルをロード
-#model = load_model('./model.h5')#学習済みモデルをロード →これだとエラーが出たValueError: Unknown optimizer: Custom>Adadelta
-
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -41,7 +37,6 @@ def upload_file():
 
             #受け取った画像を読み込み、np形式に変換
             img = image.load_img(filepath, grayscale=False, target_size=(image_size,image_size))
-            #img = image.load_img(filepath, grayscale=True, target_size=(image_size,image_size))
             img = image.img_to_array(img)
             data = np.array([img])
             #変換したデータをモデルに渡して予測する
